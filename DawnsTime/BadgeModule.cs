@@ -58,7 +58,6 @@ namespace DawnsTime
                     return res;
                 }
             }
-            // Please, please handle exceptions in a way that provides information about the context of the error.
             catch (Exception e)
             {
                 return HandleException(e, String.Format("BadgesModule.GetById({0})", id));
@@ -166,7 +165,7 @@ namespace DawnsTime
             Console.WriteLine("----------------------\n{0}\n{1}\n--------------------", errorContext, e.Message);
             if (e.InnerException != null)
                 Console.WriteLine("{0}\n--------------------", e.InnerException.Message);
-            // but don't be tempted to return detail to the caller as it is a breach of security.
+            
             return ErrorBuilder.ErrorResponse(this.Request.Url.ToString(), "GET", HttpStatusCode.InternalServerError, "Operational difficulties");
         }
 

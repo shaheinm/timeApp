@@ -31,7 +31,6 @@ namespace DawnsTime
     {
         internal IList<Time> Get(int top, int from, string filter)
         {
-            // TODO: acknowledge parameter values.
             String sql = "select * from IeTime order by Id";
             return BadgeContext.GetDatabase().Query<Time>(sql).ToList();
         }
