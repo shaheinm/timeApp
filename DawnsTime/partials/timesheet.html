@@ -1,0 +1,29 @@
+﻿<h1>Hello <span ng-bind="name"></span>!</h1>
+
+<h3> Who are you? </h3>
+<input type="text"
+       id="yourName"
+       ng-model="name"
+       required
+       placeholder="Enter your name" />
+
+<h3>Date: </h3><input type="date"
+                      id="theDate"
+                      ng-model="date"
+                      placeholder="What day is it?" />
+
+<h3>Project: </h3><input type="text"
+                         id="companyName"
+                         ng-model="project"
+                         placeholder="Who are you working for?" />
+
+<h3>Hours: </h3><input type="text"
+                       id="hoursWorked"
+                       ng-model="hours"
+                       placeholder="Tell us how long it took" />
+
+<h3>Description: </h3>
+<textarea ng-model="description" id="longDesc" placeholder="Anything else?"> </textarea>
+<br />
+<br />
+<input type="submit" class="btn btn-primary" value="Submit"/>

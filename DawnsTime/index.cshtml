@@ -1,0 +1,93 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" ng-app="timeApp">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
+    <title>Integration Engineer Timesheet</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /> 
+    <style type="text/css">
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="time">Enter Your Time to Make Dawn Happy!</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a ui-sref="time">Timesheet</a></li>
+                    <li><a ui-sref="time">Reports</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+                    <h1>Hello <span ng-bind="time.name"></span>!</h1>
+                    <form class="form-horizontal" role="form" ng-controller="TimeCreateController" ng-submit="$scope.time.$save()">
+                        <h3> Who are you? </h3>
+                        <input type="text"
+                               id="yourName"
+                               ng-model="time.name"
+                               required
+                               placeholder="Enter your name" />
+
+                        <h3>Date: </h3><input type="date"
+                                              id="theDate"
+                                              ng-model="time.date"
+                                              placeholder="What day is it?" />
+
+                        <h3>Project: </h3><input type="text"
+                                                 id="companyName"
+                                                 ng-model="time.project"
+                                                 placeholder="Who are you working for?" />
+
+                        <h3>Hours: </h3><input type="text"
+                                               id="hoursWorked"
+                                               ng-model="time.hours"
+                                               placeholder="Tell us how long it took" />
+
+                        <h3>Description: </h3>
+                        <textarea ng-model="time.description" id="longDesc" placeholder="Anything else?"> </textarea>
+                        <br />
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                        <span ng-bind="time"></span>
+                    </form>
+    <img src="~/Content/nancy-logo.png" alt="Nancy logo" /><br />
+    This view was rendered using the Nancy Razor view engine
+    <footer>
+        <p>This app was developed in all of its simplisitic glory by Shahein Moussavi</p>
+    </footer>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+    <script type="text/javascript" src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript">
+        angular.module('timeApp', ['ngResource']);
+    </script>
+    <script type="text/javascript">
+        angular.module('timeApp', ['ngResource']).factory('Time',["$resource", function ($resource) {
+            return $resource('/api/badges/');
+    }]);
+    </script>
+    <script type="text/javascript">
+        angular.module('timeApp', ['ngResource']).controller('TimeCreateController', ["$resource", "$scope", function ($resource, $scope) {
+            //$scope.time = new Time();
+            var time = $resource('/api/badges/',
+                { name: $scope.name, date: $scope.date, project: $scope.project, hours: $scope.hours, description: $scope.description });
+            //var time = times[0];
+            //expect(time instanceof TimeSheet).toEqual(true);
+            time.name = "Shahein";
+          $scope.time.$save(function () {
+              //form entry should be sent as POST request
+              console.log($scope.time);
+          });
+  }]);
+    </script>
+</body>
+</html>

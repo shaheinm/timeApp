@@ -12,7 +12,7 @@ namespace DawnsTime
     {
 
         public BadgeModule()
-            : base("/Badges")
+            : base("/api/badges")
         {
 
             Get["/"] = parameter => { return GetAll(); };
